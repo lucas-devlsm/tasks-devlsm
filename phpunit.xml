@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Task Manager Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    
+    <coverage>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <directory>vendor</directory>
+        </exclude>
+    </coverage>
+    
+    <php>
+        <env name="DB_HOST" value="db"/>
+        <env name="DB_NAME" value="task_manager_test"/>
+        <env name="DB_USER" value="task_user"/>
+        <env name="DB_PASS" value="task_password"/>
+    </php>
+</phpunit> 

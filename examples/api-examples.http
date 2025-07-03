@@ -1,0 +1,94 @@
+### Exemplos de uso da API do Gerenciador de Tarefas
+
+### 1. Registro de usuário
+POST http://localhost:9000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "usuario_teste",
+    "email": "teste@example.com",
+    "password": "senha123"
+}
+
+### 2. Login
+POST http://localhost:9000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin123"
+}
+
+### 3. Login para acesso ao painel admin
+POST http://localhost:9000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin123"
+}
+
+### 4. Listar tarefas (requer token)
+GET http://localhost:9000/api/tasks
+Authorization: Bearer SEU_TOKEN_JWT_AQUI
+
+### 5. Criar nova tarefa
+POST http://localhost:9000/api/tasks
+Content-Type: application/json
+Authorization: Bearer SEU_TOKEN_JWT_AQUI
+
+{
+    "title": "Minha primeira tarefa",
+    "description": "Esta é uma descrição da tarefa",
+    "status": "pendente"
+}
+
+### 6. Buscar tarefa por ID
+GET http://localhost:9000/api/tasks/1
+Authorization: Bearer SEU_TOKEN_JWT_AQUI
+
+### 7. Atualizar tarefa
+PUT http://localhost:9000/api/tasks/1
+Content-Type: application/json
+Authorization: Bearer SEU_TOKEN_JWT_AQUI
+
+{
+    "title": "Tarefa atualizada",
+    "description": "Nova descrição",
+    "status": "em_andamento"
+}
+
+### 8. Atualizar apenas o status
+PATCH http://localhost:9000/api/tasks/1/status
+Content-Type: application/json
+Authorization: Bearer SEU_TOKEN_JWT_AQUI
+
+{
+    "status": "concluida"
+}
+
+### 9. Excluir tarefa
+DELETE http://localhost:9000/api/tasks/1
+Authorization: Bearer SEU_TOKEN_JWT_AQUI
+
+### PAINEL DE ADMINISTRAÇÃO
+
+### 10. Acessar painel admin (via browser)
+# URL: http://localhost:9000/admin/
+# Requisito: Estar logado como admin (ID 1 ou username 'admin')
+# Funcionalidades:
+# - Dashboard com estatísticas
+# - Lista de usuários
+# - Gerenciamento de usuários
+# - Interface responsiva
+
+### 11. Exemplo com curl - Login
+curl -X POST http://localhost:9000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "admin", "password": "admin123"}'
+
+### 12. Exemplo com curl - Criar tarefa
+curl -X POST http://localhost:9000/api/tasks \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer SEU_TOKEN_JWT_AQUI" \
+  -d '{"title": "Tarefa via curl", "description": "Criada via curl", "status": "pendente"}' 
